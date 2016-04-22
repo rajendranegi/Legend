@@ -1,0 +1,20 @@
+﻿@using LegendBLL
+@{
+    UserSessionModel objLogin = (UserSessionModel)Session[UserSessionModel.userSessionName];
+    if (objLogin != null)
+    {
+        ViewContext.Controller.ViewBag.UserName = Convert.ToString(objLogin.FirstName) + " " + Convert.ToString(objLogin.LastName);
+        switch ((clsCommon._AccessLevel)objLogin.AccessID)
+        {
+            case clsCommon._AccessLevel._SuperAdmin:
+                Layout = "~/Views/Shared/_AdminLayout.cshtml";
+                break;
+            case clsCommon._AccessLevel._User:
+                Layout = "~/Views/Shared/_UserLayout.cshtml";
+                break;
+        }
+    }
+    //else {
+    //    return 
+    //}
+}

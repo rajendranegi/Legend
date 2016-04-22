@@ -1,0 +1,100 @@
+﻿@using LegendBLL
+@model AddressDetail
+
+@*@using (Html.BeginForm()) 
+{*@
+@using (Ajax.BeginForm("AjaxPost", "ProfileManage", new { postType = "Address" }, new AjaxOptions()
+{
+    
+    HttpMethod = "Post",
+    UpdateTargetId = "divTabsContent",
+    InsertionMode = InsertionMode.Replace
+}, new { id = "formAddress" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="well">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3">
+                    @Html.LabelFor(model => model.PresentAddressLine1, "Present Address Line 1", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                    @Html.EditorFor(model => model.PresentAddressLine1, new { htmlAttributes = new { @class = "form-control", placeholder = "Present Address Line 1" } })
+                    @Html.ValidationMessageFor(model => model.PresentAddressLine1, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    @Html.LabelFor(model => model.PresentAddressLine2, "Present Address Line 2", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PresentAddressLine2, new { htmlAttributes = new { @class = "form-control", placeholder = "Present Address Line 1" } })
+                    @Html.ValidationMessageFor(model => model.PresentAddressLine2, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    @*@Html.LabelFor(model => model.personalDetail.LastName, "Last Name", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.personalDetail.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.personalDetail.LastName, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-3">
+                    @Html.LabelFor(model => model.PresentCountryID, "Country", htmlAttributes: new { @class = "control-label" })
+                    @{
+                        var listItemCountry = new List<SelectListItem>();
+                        listItemCountry.Add(new SelectListItem { Text = "Select", Value = "0" });
+                        foreach (CountryModel objCountry in (List<CountryModel>)Model.countryList)
+                        {
+                            listItemCountry.Add(new SelectListItem { Text = objCountry.Country, Value = Convert.ToString(objCountry.CountryID) });
+                        }
+
+                    }
+                    @Html.DropDownListFor(model => model.PresentCountryID, listItemCountry, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    @Html.LabelFor(model => model.PresentStateID, "State", htmlAttributes: new { @class = "control-label" })
+                    @{
+                        var listItemState = new List<SelectListItem>();
+                        listItemState.Add(new SelectListItem { Text = "Select", Value = "0" });
+                        foreach (StateModel objState in (List<StateModel>)Model.stateList)
+                        {
+                            listItemState.Add(new SelectListItem { Text = objState.StateName, Value = Convert.ToString(objState.StateID) });
+                        }
+                    }
+                    @Html.DropDownListFor(model => model.PresentStateID, listItemState, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    @Html.LabelFor(model => model.PresentCityID, "City", htmlAttributes: new { @class = "control-label" })
+                    @{
+                        var listItemCity = new List<SelectListItem>();
+                        listItemCity.Add(new SelectListItem { Text = "Select", Value = "0" });
+                        foreach (CityModel objCity in (List<CityModel>)Model.cityList)
+                        {
+                            listItemCity.Add(new SelectListItem { Text = objCity.CityName, Value = Convert.ToString(objCity.CityID) });
+                        }
+                    }
+                    @Html.DropDownListFor(model => model.PresentCityID, listItemCity, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    @Html.LabelFor(model => model.PresentPinCode, "Present PinCode", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PresentPinCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Pin Code" } })
+                    @Html.ValidationMessageFor(model => model.PresentPinCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 pull-right">
+                    <div class="pull-right btn-group">
+                        <input type="submit" name="Command" value="SaveA" class="btn btn-info btn-group-sm" />
+                        <input type="submit" name="CancelAddress" value="Cancel" class="btn btn-default btn-group-sm" />
+                        @*@Ajax.ActionLink("Save Ajax", "AjaxPost", "ProfileManage", new { postType = "Address" }, new AjaxOptions()
+                     {
+                         HttpMethod = "POST",
+                         UpdateTargetId = "divTabsContent",
+                         InsertionMode = InsertionMode.Replace
+                     })*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+

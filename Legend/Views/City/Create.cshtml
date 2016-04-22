@@ -1,0 +1,149 @@
+﻿@using LegendBLL
+@model CityModel
+@{
+    ViewBag.Title = "Create";    
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <div class="col-xs-6 col-sm-8 title">
+                Add City
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal" role="form">
+                <div class="row form-group">
+                    <div class="editor-label col-xs-2">
+                        @Html.LabelFor(model => model.RefCountryID, "Select Country:")
+                    </div>
+                    <div class="editor-field col-xs-3">
+                        @{
+                            var listItemCountry = new List<SelectListItem>();
+                            listItemCountry.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            foreach (CountryModel objCountry in (List<CountryModel>)Model.countryList)
+                            {
+                                listItemCountry.Add(new SelectListItem { Text = objCountry.Country, Value = Convert.ToString(objCountry.CountryID) });
+                            }
+
+                        }
+                        @Html.DropDownListFor(model => model.RefCountryID, listItemCountry, new { @class = "form-control input-sm", onchange = "onCountryChangeBindState();" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.ValidationMessageFor(model => model.RefCountryID)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="editor-label col-xs-2">
+                        @Html.LabelFor(model => model.RefStateID, "Select State:")
+                    </div>
+                    <div class="editor-field col-xs-3">
+                        @{
+                            var listItemState = new List<SelectListItem>();
+                            listItemState.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            foreach (StateModel objState in (List<StateModel>)Model.stateList)
+                            {
+                                listItemState.Add(new SelectListItem { Text = objState.StateName, Value = Convert.ToString(objState.StateID) });
+                            }
+
+                        }
+                        @Html.DropDownListFor(model => model.RefStateID, listItemState, new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.ValidationMessageFor(model => model.RefStateID)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="editor-label col-xs-2">
+                        @Html.LabelFor(model => model.CityName, "City Name:")
+                    </div>
+                    <div class="editor-field col-xs-3">
+                        @Html.TextBoxFor(model => model.CityName, new { @style = "font-size: 14px; font-weight:normal;", @class = "form-control input-sm", placeholder = "Enter City Name" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.ValidationMessageFor(model => model.CityName)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer text-center">
+            <div class="btn-group btn-group-sm">
+                @Html.ActionLink("Back to list", "Index", "City", null, new { @class = "btn btn-default input-sm" })
+                <input type="submit" value="Create" class="btn btn-info input-sm" />
+            </div>
+        </div>
+    </div>
+    @section scripts{
+       <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+        function onCountryChangeBindState()
+        {
+
+            var countryId = $('#RefCountryID').val();
+            $('#RefStateID').html('');
+            var procemessage = "<option value='0'> Please wait...</option>";
+            $('#RefStateID').html(procemessage).show();
+            var url = '@Url.Action("GetSelectedState4Country")'; // "/City/GetSelectedState4COuntry";
+
+            $.ajax({
+                url: url,
+                data: { Id: countryId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                    var markup = "<option value='0'>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $('#RefStateID').html('');
+                    $('#RefStateID').html(markup).show();
+                },
+                error: function (reponse) {
+                    alert(JSON.parse(reponse));
+                    alert("error : " + reponse);
+                }
+            });
+
+        }
+
+        function onStateChangeBindCity() {
+
+            var StateID = $('#StateID').val();
+            $('#CityID').html('');
+            var procemessage = "<option value='0'> Please wait...</option>";
+            $('#CityID').html(procemessage).show();
+            var url = '@Url.Action("GetSelectedCity4State")'; // "/City/GetSelectedState4COuntry";
+
+            $.ajax({
+                url: url,
+                data: { Id: StateID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                    var markup = "<option value='0'>Select</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                    }
+                    $('#CityID').html('');
+                    $('#CityID').html(markup).show();
+                },
+                error: function (reponse) {
+                    alert(JSON.parse(reponse));
+                    alert("error : " + reponse);
+                }
+            });
+
+        }
+</script>
+    }
+
+                            }

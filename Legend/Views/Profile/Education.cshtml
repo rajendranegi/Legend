@@ -1,0 +1,172 @@
+﻿@model LegendBLL.EducationDetail
+
+@{
+    ViewBag.Title = "Education";
+}
+
+<h2 class="text-center"> Manage Profile</h2>
+<div class="clearfix">
+    <div id="divProfile" class="col-xs-3 col-sm-2 col-md-2" style="padding-right:0px;">
+        @Html.Partial("~/Views/Profile/_ProfileTab.cshtml", "Education")
+    </div>
+    <div class="col-xs-9 col-sm-10 col-md-10" style="padding-left:0px;">
+        <div id="divTabsContent" class="tab-content tab-pane bordered" style="padding:15px;">
+            <div class="form-horizontal">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.HiddenFor(model => model.EduID)
+                                @Html.LabelFor(model => model.Course, "Course", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                                @Html.EditorFor(model => model.Course, new { htmlAttributes = new { @class = "form-control", placeholder = "Course" } })
+                                @Html.ValidationMessageFor(model => model.Course, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.Subject, "Subject", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = "Subject" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.CourseStartDate, "Course Start Date", htmlAttributes: new { @class = "control-label" })
+                                <div class='input-group date' id='dtCourseStartDate' data-date-format="DD/MM/YYYY">
+                                    @Html.EditorFor(model => model.CourseStartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Course Start Date" } })
+                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CourseStartDate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.CoursePassDate, "Course Pass Date", htmlAttributes: new { @class = "control-label" })
+                                <div class='input-group date' id='dtCoursePassDate' data-date-format="DD/MM/YYYY">
+                                    @Html.EditorFor(model => model.CoursePassDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Course Pass Date" } })
+                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CoursePassDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.College, "College", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                                @Html.EditorFor(model => model.College, new { htmlAttributes = new { @class = "form-control", placeholder = "College" } })
+                                @Html.ValidationMessageFor(model => model.College, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.University, "University", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.University, new { htmlAttributes = new { @class = "form-control", placeholder = "University" } })
+                                @Html.ValidationMessageFor(model => model.University, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PresentCountryID, "Country", htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        var listItemCountry = new List<SelectListItem>();
+                                        listItemCountry.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                        foreach (CountryModel objCountry in (List<CountryModel>)Model.countryList)
+                                        {
+                                            listItemCountry.Add(new SelectListItem { Text = objCountry.Country, Value = Convert.ToString(objCountry.CountryID) });
+                                        }
+
+                                    }
+                                    @Html.DropDownListFor(model => model.PresentCountryID, listItemCountry, htmlAttributes: new { @class = "form-control", onchange = "onCountryChangeBindStatePresent();" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PresentStateID, "State", htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        var listItemState = new List<SelectListItem>();
+                                        listItemState.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                        foreach (StateModel objState in (List<StateModel>)Model.stateList)
+                                        {
+                                            listItemState.Add(new SelectListItem { Text = objState.StateName, Value = Convert.ToString(objState.StateID) });
+                                        }
+                                    }
+                                    @Html.DropDownListFor(model => model.PresentStateID, listItemState, htmlAttributes: new { @class = "form-control", onchange = "onStateChangeBindCityPresent();" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PresentCityID, "City", htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        var listItemCity = new List<SelectListItem>();
+                                        listItemCity.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                        foreach (CityModel objCity in (List<CityModel>)Model.cityList)
+                                        {
+                                            listItemCity.Add(new SelectListItem { Text = objCity.CityName, Value = Convert.ToString(objCity.CityID) });
+                                        }
+                                    }
+                                    @Html.DropDownListFor(model => model.PresentCityID, listItemCity, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PresentPinCode, "Present PinCode", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.PresentPinCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Pin Code" } })
+                                    @Html.ValidationMessageFor(model => model.PresentPinCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PermanentAddressLine1, "Permanent Address Line 1", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                                    @Html.EditorFor(model => model.PermanentAddressLine1, new { htmlAttributes = new { @class = "form-control", placeholder = "Permanent Address Line 1" } })
+                                    @Html.ValidationMessageFor(model => model.PermanentAddressLine1, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PermanentAddressLine2, "Permanent Address Line 2", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.PermanentAddressLine2, new { htmlAttributes = new { @class = "form-control", placeholder = "Permanent Address Line 1" } })
+                                    @Html.ValidationMessageFor(model => model.PermanentAddressLine2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PermanentCountryID, "Country", htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.DropDownListFor(model => model.PermanentCountryID, listItemCountry, htmlAttributes: new { @class = "form-control", onchange = "onCountryChangeBindStatePermanent();" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PermanentStateID, "State", htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.DropDownListFor(model => model.PermanentStateID, listItemState, htmlAttributes: new { @class = "form-control", onchange = "onStateChangeBindCityPermanent();" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PermanentCityID, "City", htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.DropDownListFor(model => model.PermanentCityID, listItemCity, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.PermanentPinCode, "Permanent PinCode", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.PermanentPinCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Pin Code" } })
+                                    @Html.ValidationMessageFor(model => model.PermanentPinCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />*@
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3 pull-right">
+                                <div class="pull-right btn-group">
+                                    <input type="submit" name="Command" value="Save" class="btn btn-info btn-group-sm" />
+                                    <input type="submit" name="CancelAddress" value="Cancel" class="btn btn-default btn-group-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.ListEducationDetail != null && Model.ListEducationDetail.Count() > 0)
+                {
+                    <div class="">
+                        @Html.Partial("~/Views/Profile/_ProfileEducation.cshtml", Model.ListEducationDetail)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('div[id$=dtCourseStartDate]').datetimepicker({ pickTime: false, format: "DD/MM/YYYY" });
+            $('div[id$=dtCoursePassDate]').datetimepicker({ pickTime: false, format: "DD/MM/YYYY" });
+        });
+    </script>
+}

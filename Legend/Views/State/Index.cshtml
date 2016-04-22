@@ -1,0 +1,95 @@
+﻿@using LegendBLL
+@model StateModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <div class="col-xs-12 col-sm-6 col-md-8 title">
+            State List
+        </div>
+        <div id="reportrange" class="col-xs-12 col-sm-6 col-md-4">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    @Html.ActionLink("Add", "Create", "State", null, new { @class = "btn btn-default" })
+                </span>
+                @using (Html.BeginForm("Search", "State", FormMethod.Post, new { @class = "input-group" }))
+                {
+                    @Html.TextBoxFor(model => model.StateName, null, new { @class = "form-control", placeholder = "Search by Country | State" })
+                    <span class="input-group-btn">
+                        <input type="submit" value="Search" class="btn btn-default btn-group" />
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+    <table id="tblState" class="panel-body table table-condensed table-bordered table-hover">
+        <tr>
+            <th class="col-xs-1 col-sm-1">
+                #
+            </th>
+            <th style="display: none;">
+                StateID
+            </th>
+            <th class="col-xs-3 col-sm-3">
+                State
+            </th>
+            <th class="col-xs-2 col-sm-3">
+                Country
+            </th>
+            <th class="text-center col-xs-4 col-sm-4">
+                Action
+            </th>
+        </tr>
+        @if (Model.stateList != null && Model.stateList.Count > 0)
+        {
+            int count = 0;
+            foreach (var item in Model.stateList)
+            {
+                count++;
+                using (Html.BeginForm("Delete", "State", new { id = item.StateID }))
+                {
+                    <tbody id="tblbody">
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td style="display: none;">
+                                @Html.DisplayFor(modelItem => item.StateID)                                
+                                @Html.DisplayFor(modelItem => item.RefCountryID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StateName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CountryName)
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.StateID }, new { @class = "btn btn-default input-sm" })
+                                    <input type="submit" value="Delete" class="btn btn-default input-sm"
+                                           onclick="return confirm('Are you sure to delete state @item.StateName')" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    <b>No Record Found</b>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="panel-footer text-center">
+        <div class="pagination">
+        </div>
+    </div>
+</div>

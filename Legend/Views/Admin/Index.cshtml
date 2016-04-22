@@ -1,0 +1,212 @@
+﻿@using LegendBLL
+@model AdminModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    @if (Model.cityList.Count > 0)
+    {
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <table class="table table-condensed table-bordered table-hover">
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">Sr No.</td>
+                    <td class="col-xs-4 col-sm-4 col-md-4">City Name</td>
+                    <td class="col-xs-4 col-sm-4 col-md-4">State Name</td>
+                    <td class="col-xs-4 col-sm-4 col-md-4">Country Name</td>
+                </tr>
+                @{ int countCity = 0;
+                foreach (CityModel cityModel in Model.cityList)
+                {
+                    if (countCity < 10)
+                    {
+                        countCity = countCity + 1;
+                            <tr>
+                                <td class="hidden-xs col-sm-2 col-md-2">@countCity</td>
+                                <td class="col-xs-4 col-sm-4 col-md-4">@Html.Label(cityModel.CityName)</td>
+                                <td class="col-xs-4 col-sm-4 col-md-4">@Html.Label(cityModel.StateName)</td>
+                                <td class="col-xs-4 col-sm-4 col-md-4">@Html.Label(cityModel.Country)</td>
+                            </tr>
+                        }
+                        else { break; }
+                    }
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        @Html.ActionLink("View", "Index", "City", null, new { @class = "btn btn-default text-info" })
+                </td>
+            </tr>
+
+        </table>
+    </div>
+                    }
+    @if (Model.stateList.Count > 0)
+    {
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <table class="table table-condensed table-bordered table-hover">
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">Sr No.</td>
+                    <td class="col-xs-6 col-sm-5 col-md-5">State Name</td>
+                    <td class="col-xs-6 col-sm-5 col-md-5">Country Name</td>
+                </tr>
+                @{ int countState = 0;
+                foreach (StateModel stateModel in Model.stateList)
+                {
+                    if (countState < 10)
+                    {
+                        countState = countState + 1;
+                            <tr>
+                                <td class="hidden-xs col-sm-2 col-md-2">@countState</td>
+                                <td class="col-xs-6 col-sm-5 col-md-5">@Html.Label(stateModel.StateName)</td>
+                                <td class="col-xs-6 col-sm-5 col-md-5">@Html.Label(stateModel.CountryName)</td>
+                            </tr>
+                        }
+                        else { break; }
+                    }
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        @Html.ActionLink("View", "Index", "State", null, new { @class = "btn btn-default text-info" })
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+                    }
+    @if (Model.countryList.Count > 0)
+    {
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <table class="table table-condensed table-bordered table-hover">
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">Sr No.</td>
+                    <td class="col-xs-12 col-sm-10 col-md-10">Country Name</td>
+                </tr>
+                @{ int countCountry = 0;
+                foreach (CountryModel countryModel in Model.countryList)
+                {
+                    if (countCountry < 10)
+                    {
+                        countCountry = countCountry + 1;
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">@countCountry</td>
+                    <td class="col-xs-12 col-sm-10 col-md-10">@Html.Label(countryModel.Country)</td>
+                </tr>
+                        }
+                        else { break; }
+                    }
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        @Html.ActionLink("View", "Index", "Country", null, new { @class = "btn btn-default text-info" })
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+                    }
+    @if (Model.departmentList.Count > 0)
+    {
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <table class="table table-condensed table-bordered table-hover">
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">Sr No.</td>
+                    <td class="col-xs-12 col-sm-10 col-md-10">Department Name</td>
+                </tr>
+                @{ int countDepartment = 0;
+                foreach (DepartmentModel departmentModel in Model.departmentList)
+                {
+                    if (countDepartment < 10)
+                    {
+                        countDepartment = countDepartment + 1;
+                            <tr>
+                                <td class="hidden-xs col-sm-2 col-md-2">@countDepartment</td>
+                                <td class="col-xs-12 col-sm-10 col-md-10">@Html.Label(departmentModel.Department)</td>
+                            </tr>
+                        }
+                        else { break; }
+                    }
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        @Html.ActionLink("View", "Index", "Sal_Dept_Desig", null, new { @class = "btn btn-default text-info" })
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+                    }
+    @if (Model.designationList.Count > 0)
+    {
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <table class="table table-condensed table-bordered table-hover">
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">Sr No.</td>
+                    <td class="col-xs-12 col-sm-10 col-md-10">Designation Name</td>
+                </tr>
+                @{ int countDesignation = 0;
+                foreach (DesignationModel designationModel in Model.designationList)
+                {
+                    if (countDesignation < 10)
+                    {
+                        countDesignation = countDesignation + 1;
+                            <tr>
+                                <td class="hidden-xs col-sm-2 col-md-2">@countDesignation</td>
+                                <td class="col-xs-12 col-sm-10 col-md-10">@Html.Label(designationModel.Designation)</td>
+                            </tr>
+                        }
+                        else { break; }
+                    }
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        @Html.ActionLink("View", "Index", "Sal_Dept_Desig", null, new { @class = "btn btn-default text-info" })
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+                    }
+    @if (Model.salutationList.Count > 0)
+    {
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <table class="table table-condensed table-bordered table-hover">
+                <tr>
+                    <td class="hidden-xs col-sm-2 col-md-2">Sr No.</td>
+                    <td class="col-xs-12 col-sm-10 col-md-10">Salutation Name</td>
+                </tr>
+                @{ int countSalutation = 0;
+                foreach (SalutationModel salutationModel in Model.salutationList)
+                {
+                    if (countSalutation < 10)
+                    {
+                        countSalutation = countSalutation + 1;
+                            <tr>
+                                <td class="hidden-xs col-sm-2 col-md-2">@countSalutation</td>
+                                <td class="col-xs-12 col-sm-10 col-md-10">@Html.Label(salutationModel.Salutation, salutationModel.Salutation)</td>
+                            </tr>
+                        }
+                        else { break; }
+                    }
+                }
+                <tr>
+                    <td colspan="4" class="text-right">
+                        @Html.ActionLink("View", "Index", "Sal_Dept_Desig", null, new { @class = "btn btn-default text-info" })
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+                    }
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(window).resize()
+        });
+    </script>
+}
+

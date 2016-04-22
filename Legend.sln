@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend", "Legend\Legend.csproj", "{345564B4-744F-4FE5-9289-A26E40E9138C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendBLL", "..\LegendBLL\LegendBLL.csproj", "{EB6DF81B-DBF6-480E-93E1-B2CB754548C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendDAL", "..\LegendDAL\LegendDAL.csproj", "{B318E205-DAA9-4701-B71B-F92A9C41C5D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{345564B4-744F-4FE5-9289-A26E40E9138C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{345564B4-744F-4FE5-9289-A26E40E9138C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{345564B4-744F-4FE5-9289-A26E40E9138C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{345564B4-744F-4FE5-9289-A26E40E9138C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB6DF81B-DBF6-480E-93E1-B2CB754548C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6DF81B-DBF6-480E-93E1-B2CB754548C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB6DF81B-DBF6-480E-93E1-B2CB754548C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6DF81B-DBF6-480E-93E1-B2CB754548C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B318E205-DAA9-4701-B71B-F92A9C41C5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B318E205-DAA9-4701-B71B-F92A9C41C5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B318E205-DAA9-4701-B71B-F92A9C41C5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B318E205-DAA9-4701-B71B-F92A9C41C5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

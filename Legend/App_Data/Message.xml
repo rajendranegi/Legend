@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Message>
+  <Class ID="Validation">
+    <MessageGroup ID="RequiredText">
+      <MessageText>Please Enter Value</MessageText>
+    </MessageGroup>
+    <MessageGroup ID="RequiredSelect">
+      <MessageText>Please Select Value</MessageText>
+    </MessageGroup>
+  </Class>
+</Message>

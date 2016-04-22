@@ -1,0 +1,308 @@
+﻿@using LegendBLL
+@model Sal_Dept_DesigModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 title">
+                    Salutation List
+                </div>
+                <div id="reportrange" class="col-xs-12 col-sm-12 col-md-12">
+
+
+                    @using (Html.BeginForm("Salutation", "Sal_Dept_Desig", null, FormMethod.Post, new { @class = "" }))
+                    {
+                        <div class="input-group">
+                            @Html.HiddenFor(m => m.SalutationID, Model.SalutationID)
+                            @Html.TextBoxFor(model => model.Salutation, null, new { @class = "form-control", placeholder = "Salutation Add/Edit/Search" })
+
+                            <div class="input-group-btn">
+                                <input type="submit" name="submit" value="Search" class="btn btn-default" />
+                                @if (Model.SalutationID != 0)
+                                {
+                                    <input type="submit" name="submit" value='Update' class="btn btn-default" />
+                                }
+                                else
+                                {
+                                    <input type="submit" name="submit" value='Add' class="btn btn-default" />
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <table id="tblSalutation" class="panel-body table table-condensed table-bordered table-hover">
+                <tr>
+                    <th class="col-xs-1 col-sm-1">
+                        #
+                    </th>
+                    <th style="display: none;">
+                        SalutationID
+                    </th>
+                    <th class="col-xs-2 col-sm-3">
+                        Salutation
+                    </th>
+                    <th class="text-center col-xs-4 col-sm-4">
+                        Action
+                    </th>
+                </tr>
+                @if (Model.salutationList != null && Model.salutationList.Count > 0)
+                {
+                    int count = 0;
+                    foreach (var item in Model.salutationList)
+                    {
+                        count++;
+
+                        <tbody id="tblbody">
+                            <tr>
+                                <td>
+                                    @count
+                                </td>
+                                <td style="display: none;">
+                                    @Html.DisplayFor(modelItem => item.SalutationID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salutation)
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm">
+
+                                        @using (Html.BeginForm("EditSalutation", "Sal_Dept_Desig", new { Id = item.SalutationID }, FormMethod.Post, new { @class = "btn-group" }))
+                                        {
+                                            <input type="submit" value="Edit" class="btn btn-default btn-sm" />
+                                        }
+                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.SalutationID }, new { @class = "btn btn-default input-sm" })*@
+
+                                        @using (Html.BeginForm("DeleteSalutation", "Sal_Dept_Desig", new { id = item.SalutationID }, FormMethod.Post, new { @class = "btn-group" }))
+                                        {
+                                            <input type="submit" value="Delete" class="btn btn-default btn-sm"
+                                                   onclick="return confirm('Are you sure to delete Salutation @item.Salutation')" />
+                                        }
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">
+                            <b>No Record Found</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer text-center">
+                <div class="pagination">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 title">
+                    Designation List
+                </div>
+                <div id="reportrange" class="col-xs-12 col-sm-12 col-md-12">
+                    @using (Html.BeginForm("Designation", "Sal_Dept_Desig", null, FormMethod.Post, new { @class = "" }))
+                    {
+                        <div class="input-group">
+                            @Html.HiddenFor(m => m.DesignationID, Model.DesignationID)
+                            @Html.TextBoxFor(model => model.Designation, null, new { @class = "form-control", placeholder = "Designation Add/Edit/Search" })
+
+                            <div class="input-group-btn">
+                                <input type="submit" name="submit" value="Search" class="btn btn-default" />
+                                @if (Model.DesignationID != 0)
+                                {
+                                    <input type="submit" name="submit" value='Update' class="btn btn-default" />
+                                }
+                                else
+                                {
+                                    <input type="submit" name="submit" value='Add' class="btn btn-default" />
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <table id="tblDesignation" class="panel-body table table-condensed table-bordered table-hover">
+                <tr>
+                    <th class="col-xs-1 col-sm-1">
+                        #
+                    </th>
+                    <th style="display: none;">
+                        DesignationID
+                    </th>
+                    <th class="col-xs-2 col-sm-3">
+                        Designation
+                    </th>
+                    <th class="text-center col-xs-4 col-sm-4">
+                        Action
+                    </th>
+                </tr>
+                @if (Model.designationList != null && Model.designationList.Count > 0)
+                {
+                    int count = 0;
+                    foreach (var item in Model.designationList)
+                    {
+                        count++;
+
+                        <tbody id="tblbody">
+                            <tr>
+                                <td>
+                                    @count
+                                </td>
+                                <td style="display: none;">
+                                    @Html.DisplayFor(modelItem => item.DesignationID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Designation)
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm">
+
+                                        @using (Html.BeginForm("EditDesignation", "Sal_Dept_Desig", new { Id = item.DesignationID }, FormMethod.Post, new { @class = "btn-group" }))
+                                        {
+                                            <input type="submit" value="Edit" class="btn btn-default btn-sm" />
+                                        }
+                                        @using (Html.BeginForm("DeleteDesignation", "Sal_Dept_Desig", new { id = item.DesignationID }, FormMethod.Post, new { @class = "btn-group" }))
+                                        {
+                                            <input type="submit" value="Delete" class="btn btn-default btn-sm"
+                                                   onclick="return confirm('Are you sure to delete Designation @item.Designation')" />
+                                        }
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">
+                            <b>No Record Found</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer text-center">
+                <div class="pagination">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 title">
+                    Department List
+                </div>
+                <div id="reportrange" class="col-xs-12 col-sm-12 col-md-12">
+                    @using (Html.BeginForm("Department", "Sal_Dept_Desig", null, FormMethod.Post, new { @class = "" }))
+                    {
+                        <div class="input-group">
+                            @Html.HiddenFor(m => m.DepartmentID, Model.DepartmentID)
+                            @Html.TextBoxFor(model => model.Department, null, new { @class = "form-control", placeholder = "Department Add/Edit/Search" })
+
+                            <div class="input-group-btn">
+                                <input type="submit" name="submit" value="Search" class="btn btn-default" />
+                                @if (Model.DepartmentID != 0)
+                                {
+                                    <input type="submit" name="submit" value='Update' class="btn btn-default" />
+                                }
+                                else
+                                {
+                                    <input type="submit" name="submit" value='Add' class="btn btn-default" />
+                                }
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+            <table id="tblDepartment" class="panel-body table table-condensed table-bordered table-hover">
+                <tr>
+                    <th class="col-xs-1 col-sm-1">
+                        #
+                    </th>
+                    <th style="display: none;">
+                        DepartmentID
+                    </th>
+                    <th class="col-xs-2 col-sm-3">
+                        Department
+                    </th>
+                    <th class="text-center col-xs-4 col-sm-4">
+                        Action
+                    </th>
+                </tr>
+                @if (Model.departmentList != null && Model.departmentList.Count > 0)
+            {
+                int count = 0;
+                foreach (var item in Model.departmentList)
+                {
+                    count++;
+                        <tbody id="tblbody">
+                            <tr>
+                                <td>
+                                    @count
+                                </td>
+                                <td style="display: none;">
+                                    @Html.DisplayFor(modelItem => item.DepartmentID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Department)
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm">
+
+                                        @using (Html.BeginForm("EditDepartment", "Sal_Dept_Desig", new { Id = item.DepartmentID }, FormMethod.Post, new { @class = "btn-group" }))
+                                        {
+                                            <input type="submit" value="Edit" class="btn btn-default btn-sm" />
+                                        }
+                                        @using (Html.BeginForm("DeleteDepartment", "Sal_Dept_Desig", new { id = item.DepartmentID }, FormMethod.Post, new { @class = "btn-group" }))
+                                        {
+                                            <input type="submit" value="Delete" class="btn btn-default btn-sm"
+                                                   onclick="return confirm('Are you sure to delete Department @item.Department')" />
+                                        }
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">
+                            <b>No Record Found</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer text-center">
+                <div class="pagination">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

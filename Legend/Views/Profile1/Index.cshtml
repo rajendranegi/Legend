@@ -1,0 +1,253 @@
+﻿@using LegendBLL
+@model ProfileModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="divProfile" class="container">
+    <h2> Manage Profile</h2>
+
+    <ul id="divTabs" class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active">
+            <a href="#divTabPersonal" data-toggle="tab">Personal</a>
+        </li>
+        <li role="presentation">
+            <a href="#divTabAddress" data-toggle="tab">Address</a>
+        </li>
+        <li role="presentation">
+            <a href="#divTabContact" data-toggle="tab">Contact</a>
+        </li>
+    </ul>
+    @*@using (Ajax.BeginForm("Index","Profile",new AjaxOptions() {
+        HttpMethod = "POST",
+        UpdateTargetId = "divTabsContent",
+        InsertionMode = InsertionMode.Replace
+    } )) {
+
+    }*@
+@using (Html.BeginForm("Index","Profile",FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <div id="divTabsContent" class="tab-content bordered" style="padding:15px;">
+        @*@Html.DisplayFor(m => m.personalDetail.FirstName)*@
+        <div id="divTabPersonal" class="tab-pane fade active in">
+            <div class="well">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.personalDetail.SalutationID, "Salutation", htmlAttributes: new { @class = "control-label" })
+                        @{
+                            var listItemSalutation = new List<SelectListItem>();
+                            listItemSalutation.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            foreach (SalutationModel objSalutation in (List<SalutationModel>)Model.personalDetail.salutationList)
+                            {
+                                listItemSalutation.Add(new SelectListItem { Text = objSalutation.Salutation, Value = Convert.ToString(objSalutation.SalutationID) });
+                            }
+
+                        }
+                        @Html.DropDownListFor(model => model.personalDetail.SalutationID, listItemSalutation, htmlAttributes: new { @class = "form-control" })
+                        @*@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                            <select ID="ddlSalutation" CssClass="form-control input-sm">
+                                <option>Select Salutation</option>
+                                <option> Value="1">Mr.</option>
+                                <option> Value="2">Miss.</option>
+                                <option> Value="3">Mrs.</option>
+                                <option> Value="4">Dr.</option>
+                                <option> Value="5">M/S</option>
+                            </select>*@
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.personalDetail.FirstName, "First Name", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                        @Html.EditorFor(model => model.personalDetail.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.personalDetail.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.personalDetail.MiddleName, "Middle Name", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.personalDetail.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.personalDetail.MiddleName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.personalDetail.LastName, "Last Name", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.personalDetail.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.personalDetail.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.personalDetail.DOBActual, "DOB Actual", htmlAttributes: new { @class = "control-label" })
+                        <div class='input-group date' id='dtDOBActual' data-date-format="MM/DD/YYYY">
+                            @Html.EditorFor(model => model.personalDetail.DOBActual, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.personalDetail.DOBOfficial, "DOB Official", htmlAttributes: new { @class = "control-label" })
+                        <div class='input-group date' id='dtDOBOfficial' data-date-format="MM/DD/YYYY">
+                            @Html.EditorFor(model => model.personalDetail.DOBOfficial, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 pull-right">
+                        <div class="pull-right btn-group">
+                            <input type="submit" value="Save" class="btn btn-info btn-group-sm" />
+                            <input type="submit" value="Cancel" class="btn btn-default btn-group-sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="divTabAddress" class="tab-pane fade">
+            <div class="well">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.addressDetail.PresentAddressLine1, "Present Address Line 1", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                        @Html.EditorFor(model => model.addressDetail.PresentAddressLine1, new { htmlAttributes = new { @class = "form-control", placeholder = "Present Address Line 1" } })
+                        @Html.ValidationMessageFor(model => model.addressDetail.PresentAddressLine1, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.addressDetail.PresentAddressLine2, "Present Address Line 2", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.addressDetail.PresentAddressLine2, new { htmlAttributes = new { @class = "form-control", placeholder = "Present Address Line 1" } })
+                        @Html.ValidationMessageFor(model => model.addressDetail.PresentAddressLine2, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @*@Html.LabelFor(model => model.personalDetail.LastName, "Last Name", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.personalDetail.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.personalDetail.LastName, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.addressDetail.PresentCountryID, "Country", htmlAttributes: new { @class = "control-label" })
+                        @{
+                            var listItemCountry = new List<SelectListItem>();
+                            listItemCountry.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            foreach (CountryModel objCountry in (List<CountryModel>)Model.addressDetail.countryList)
+                            {
+                                listItemCountry.Add(new SelectListItem { Text = objCountry.Country, Value = Convert.ToString(objCountry.CountryID) });
+                            }
+
+                        }
+                        @Html.DropDownListFor(model => model.addressDetail.PresentCountryID, listItemCountry, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.addressDetail.PresentStateID, "State", htmlAttributes: new { @class = "control-label" })
+                        @{
+                            var listItemState = new List<SelectListItem>();
+                            listItemState.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            foreach (StateModel objState in (List<StateModel>)Model.addressDetail.stateList)
+                            {
+                                listItemState.Add(new SelectListItem { Text = objState.StateName, Value = Convert.ToString(objState.StateID) });
+                            }
+                        }
+                        @Html.DropDownListFor(model => model.addressDetail.PresentStateID, listItemState, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.addressDetail.PresentCityID, "City", htmlAttributes: new { @class = "control-label" })
+                        @{
+                            var listItemCity = new List<SelectListItem>();
+                            listItemCity.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            foreach (CityModel objCity in (List<CityModel>)Model.addressDetail.cityList)
+                            {
+                                listItemCity.Add(new SelectListItem { Text = objCity.CityName, Value = Convert.ToString(objCity.CityID) });
+                            }
+                        }
+                        @Html.DropDownListFor(model => model.addressDetail.PresentCityID, listItemCity, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        @Html.LabelFor(model => model.addressDetail.PresentPinCode, "Present PinCode", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.addressDetail.PresentPinCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Pin Code" } })
+                        @Html.ValidationMessageFor(model => model.addressDetail.PresentPinCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 pull-right">
+                        <div class="pull-right btn-group">
+                            <input type="submit" value="Save" class="btn btn-info btn-group-sm" />
+                            <input type="submit" value="Cancel" class="btn btn-default btn-group-sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="divTabContact" class="tab-pane fade">casasasasas</div>
+    </div>
+}
+</div>
+
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('div[id$=dtDOBActual]').datetimepicker({ pickTime: false, format: "DD/MM/YYYY" });
+            $('div[id$=dtDOBOfficial]').datetimepicker({ pickTime: false, format: "DD/MM/YYYY" });
+
+            //    $('ul#divTabs a').click(function () {
+            //        $(this).parent().siblings().removeClass('active');
+            //        $(this).parent().addClass('active');
+            //    });
+            //    // $('projectList').tab('show');
+        });
+    </script>
+}
+
+@*<div class="col-sm-9" id="projectList">
+        <ul class="nav nav-tabs  nav-justified" id="tbProjects">
+            <li class="">
+                <a data-toggle="tab" href="#dvProcess">
+                    In Process   <!-- onclick="LoadData(1)" -->
+                </a>
+            </li>
+            <li class="active">
+                <a data-toggle="tab" href="#dvMaintainance">
+                    Maintenance    <!-- onclick="LoadData(3)" -->
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#dvClosed">
+                    Closed  <!-- onclick="LoadData(4)" -->
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#dvOnHold">
+                    On Hold   <!-- onclick="LoadData(2)" -->
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content bordered" id="dvTabContent">
+            <div class="tab-pane fade" id="dvProcess">
+                <div class="container bordered">
+                    <div id="tblDataInProcess" class="text-center">P</div>
+                </div>
+            </div>
+            <div class="tab-pane fade active in" id="dvMaintainance">
+                <div class="container">
+                    <div id="tblDataMaintainance">M</div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="dvClosed">
+                <div class="container bordered">
+                    <div id="tblDataClosed">C</div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="dvOnHold">
+                <div class="container bordered">
+                    <div id="tblDataOnHold">H</div>
+                </div>
+            </div>
+        </div>
+
+    </div>*@
+
+
+

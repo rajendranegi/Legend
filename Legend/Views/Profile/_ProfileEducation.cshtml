@@ -1,0 +1,107 @@
+﻿@model IEnumerable<LegendBLL.EducationDetail>
+
+<div>
+    @if (Model.Count() > 0)
+    {
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+            @foreach (var item in Model)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id='@String.Format("heading" + item.Row)'>
+                        <div class="panel-title clearfix">
+                            <div class="col-xs-10 col-sm-10">
+                                <a class="col-xs-10 col-sm-10" role="button" data-toggle="collapse" data-parent="#accordion" href="#@item.Row" aria-expanded="false" aria-controls="@item.Row" style="outline:none">
+                                    @Html.Label(item.Course)
+                                </a>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 text-right">
+                                @Html.ActionLink("Edit", "EditEducation", new { EditEducationID = item.Row }, new { @class = "btn btn-info btn-xs" })
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div id="@item.Row" class='panel-collapse collapse @(item.Row == 1 ?"in":"") ' role="tabpanel" aria-labelledby='@String.Format("heading" + item.Row)'>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.Label(item.Course, "Course : ", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Label(item.Course, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.Label(item.Subject, "Subject : ", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Label(item.Subject, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.Label(item.CourseStartDate, "Course Start Date : ", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Label(item.CourseStartDate, htmlAttributes: new { @class = "control-label" })
+
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.Label(item.CoursePassDate, "Course Pass Date : ", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Label(item.CoursePassDate, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.Label(item.College, "College : ", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Label(item.College, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.Label(item.University, "University : ", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Label(item.University, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+@*<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Collapsible Group Item #1
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Collapsible Group Item #2
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Collapsible Group Item #3
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+        </div>
+    </div>
+</div>*@

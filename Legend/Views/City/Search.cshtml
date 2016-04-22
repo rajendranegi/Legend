@@ -1,0 +1,100 @@
+﻿@using LegendBLL
+@model IEnumerable<CityModel>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <div class="col-xs-4 col-sm-6 title">
+            City List
+        </div>
+        <div id="reportrange" class="col-xs-8 col-sm-6">
+            <div class="input-group">
+                @Html.ActionLink("Add", "Create", "City", null, new { @class = "btn btn-default input-group-addon" })
+                @Html.TextBox("txtSearch", null, new { @class = "form-control input-sm", placeholder = "Search by Country | State | City" })
+                <span class="input-group-addon"><input type="radio" id="country" name="filter" value="Country" /> Country</span>
+                <span class="input-group-addon"><input type="radio" id="state" name="filter" value="State" /> State</span>
+                <span class="input-group-addon"><input type="radio" id="city" name="filter" checked="checked" value="City" /> City</span>
+                @Html.ActionLink("Search", "Search", "City", null, new { @class = "btn btn-default input-group-addon" })
+                @*<a href="" onclick="GetSelectedCityList();" class="btn btn-default input-group-addon input-sm">Search</a>*@
+            </div>
+        </div>
+    </div>
+    <table id="tblLocation" class="panel-body table table-condensed table-bordered table-hover">
+        <tr>
+            <th class="col-xs-1 col-sm-1">
+                #
+            </th>
+            <th style="display: none;">
+                CityID
+            </th>
+            <th class="col-xs-2 col-sm-3">
+                City
+            </th>
+            <th class="col-xs-3 col-sm-3">
+                State
+            </th>
+            <th class="col-xs-2 col-sm-3">
+                Country
+            </th>
+            <th class="text-center col-xs-4 col-sm-4">
+                Action
+            </th>
+        </tr>
+        @if (Model != null)
+        {
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                using (Html.BeginForm("Delete", "City", new { id = item.CityID }))
+                {
+                    <tbody id="tblbody">
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td style="display: none;">
+                                @Html.DisplayFor(modelItem => item.CityID)
+                                @Html.DisplayFor(modelItem => item.RefStateID)
+                                @Html.DisplayFor(modelItem => item.RefCountryID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CityName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StateName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.CityID }, new { @class = "btn btn-default input-sm" })
+                                    <input type="submit" value="Delete" class="btn btn-default input-sm"
+                                           onclick="return confirm('Are you sure to delete city @item.CityName')" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    <b>No Record Found</b>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="panel-footer text-center">
+        <div class="pagination">
+        </div>
+    </div>
+</div>

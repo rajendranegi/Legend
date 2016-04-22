@@ -1,0 +1,116 @@
+﻿@model LegendBLL.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/respond.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    @*<script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+        <script src="../../Scripts/respond.min.js" type="text/javascript"></script>*@
+
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container-fluid">
+            <br />
+            <br />
+            <div class="col-lg-4 col-lg-offset-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading text-center">
+                        ARTH
+                        @*<img src="@Url.Content("~/Image/ArvatoLogo.gif")" alt="Arvato Bertelsmann Logo" class="col-xs-3 pull-right img-responsive" />
+                            <img src="@Url.Content("~/Image/DroneLogo.png")" alt="Drone" class="img-responsive" />*@
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <h3>
+                                Model View Controller
+                            </h3>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                @Html.LabelFor(m => m.UserName,"Enter UserName")
+                                @Html.TextBoxFor(m => m.UserName, new { @style = "font-size: 14px; font-weight:normal;", @class = "form-control input-sm", placeholder = "User Name" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                @Html.LabelFor(m => m.Password,"Enter Password")
+                                @Html.PasswordFor(m => m.Password, new { @style = "font-size: 14px; font-weight:normal;", @class = "form-control input-sm", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <div class="col-lg-offset-3 col-lg-9">
+                                    <input type="checkbox" id="chkRemember" value="Text" />
+                                    <label for="chkRemember" style="font-size: 14px; font-weight: normal; padding: 6px 12px;
+                                        height: 35px;">
+                                        Remember-Me</label>
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="col-lg-12 alert-danger">
+                                    <input type="text" id="lblMsg" class="label label-danger" />
+                                    @Html.ValidationSummary()
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <div class="col-lg-12 text-center">
+                                <div class="btn-group">
+                                    <input type="submit" value="Login" class="btn btn-info" />
+                                    @Html.ActionLink(" Register", "Registration", "Login", null, new { @class = "btn btn-default text-info" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12 text-center">                                
+                                @Html.ValidationMessage("ErrorMessage", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer text-center text-muted">
+                        <div class="text-info" style="font-size: 8pt;">
+                            &copy; 2014 - @DateTime.Now.Year ,Arth Inspiring Future
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="label label-danger">
+                    @Html.Label("lblUserName", "User Name")
+                </div>
+                <div class="form-control">
+                    @Html.EditorFor(model => model.UserName)
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Password)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+                <p>
+                    <input type="submit" value="Create" />
+                </p>*@
+        </div>
+
+    }
+</body>
+</html>
+
+

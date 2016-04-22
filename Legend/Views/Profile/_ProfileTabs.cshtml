@@ -1,0 +1,21 @@
+﻿@*@model paramTab*@
+
+<ul id="divTabs" class="nav nav-tabs nav-justified">
+    @if (ViewBag.paramTab == "Personal")
+    {    
+        <li role="presentation" class="active">
+    }else{
+    
+    } 
+<li role="presentation">
+
+            }
+            @Html.ActionLink("Personal", "Personal", "Profile")
+        </li>
+    <li role="presentation" class="active">
+        @Html.ActionLink("Address", "Address", "Profile")
+    </li>
+    <li role="presentation">
+        @Html.ActionLink("Contact", "Contact", "Profile")
+    </li>
+</ul>

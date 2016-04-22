@@ -1,0 +1,56 @@
+﻿@using LegendBLL
+@model ProfileModel
+@*@model List<object>
+@{
+    var detailPersonal = Model[0] as PersonalDetail;
+    var detailAddress = Model[1] as AddressDetail;
+    var detailContact = Model[2] as ContactDetail;
+}*@
+<div id="divProfile" class="container">
+    <h2> Manage Profile</h2>
+
+    <ul id="divTabs" class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active">
+            @Ajax.ActionLink("Personal", "Personal", "Profile", new AjaxOptions()
+       {
+           HttpMethod = "GET",
+           UpdateTargetId = "divTabsContent",
+           InsertionMode = InsertionMode.Replace
+       })
+        </li>
+        <li role="presentation">
+            @Ajax.ActionLink("Address", "Address", "Profile", new AjaxOptions()
+       {
+           HttpMethod = "GET",
+           UpdateTargetId = "divTabsContent",
+           InsertionMode = InsertionMode.Replace
+       })
+        </li>
+        <li role="presentation">
+            @Ajax.ActionLink("Contact", "Contact", "Profile", new AjaxOptions()
+       {
+           HttpMethod = "GET",
+           UpdateTargetId = "divTabsContent",
+           InsertionMode = InsertionMode.Replace
+       })
+        </li>
+    </ul>
+   @*@using (Ajax.BeginForm("AjaxPost", )) { }*@
+    <div id="divTabsContent" class="tab-content tab-pane bordered" style="padding:15px;">
+        @Html.DisplayFor(m=> m.personalDetail.FirstName)
+        @*<div id="divTabsContent" class="tab-pane"></div>*@
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('ul#divTabs a').click(function () {
+                $(this).parent().siblings().removeClass('active');
+                $(this).parent().addClass('active');
+            });
+            // $('projectList').tab('show');
+        });
+    </script>
+}

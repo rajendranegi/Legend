@@ -1,0 +1,49 @@
+﻿@model LegendBLL.CountryModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <div class="col-xs-6 col-sm-8 title">
+                Edit Country
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal" role="form">
+                <div class="row form-group">
+                    <div class="editor-label col-xs-2">
+                        @Html.LabelFor(model => model.Country, "Country Name:")
+                    </div>
+                    <div class="editor-field col-xs-3">
+                        @Html.TextBoxFor(model => model.Country, new { @style = "font-size: 14px; font-weight:normal;", @class = "form-control input-sm", placeholder = "Enter Country Name" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.ValidationMessageFor(model => model.Country)
+                    </div>
+                </div>
+                <div class="row" style="display: none;">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CountryID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CountryID)
+                        @Html.ValidationMessageFor(model => model.CountryID)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer text-center">
+        <div class="btn-group btn-group-sm">
+            @Html.ActionLink("Back to list", "Index", "Country", null, new { @class = "btn btn-default input-sm" })
+            <input type="submit" value="Save" class="btn btn-info input-sm" />
+        </div>
+    </div>
+
+}

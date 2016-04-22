@@ -1,0 +1,68 @@
+﻿@using LegendBLL
+@model ContactDetail
+
+@{
+    ViewBag.Title = "Contact";
+    //Layout = "~/Views/_ViewStart.cshtml";
+}
+
+
+<h2 class="text-center">Manage Profile</h2>
+<div class="clearfix">
+    <div id="divProfile" class="col-xs-3 col-sm-1 col-md-2" style="padding-right:0px;">
+        @Html.Partial("~/Views/Profile/_ProfileTab.cshtml", "Contact")
+    </div>
+    <div class="col-xs-9 col-sm-11 col-md-10" style="padding-left:0px;">
+        <div id="divTabsContent" class="tab-content tab-pane bordered" style="padding:15px;">
+            <div class="form-horizontal">
+                @using (Html.BeginForm())
+                {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="well">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3">
+                            @Html.LabelFor(model => model.MobileNo1, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MobileNo1, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile No 1" } })
+                            @Html.ValidationMessageFor(model => model.MobileNo1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            @Html.LabelFor(model => model.MobileNo2, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MobileNo2, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile No 2" } })
+                            @Html.ValidationMessageFor(model => model.MobileNo2, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            @Html.LabelFor(model => model.LandLineNo1, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.LandLineNo1, new { htmlAttributes = new { @class = "form-control", placeholder = "LandLine No 1" } })
+                            @Html.ValidationMessageFor(model => model.LandLineNo1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            @Html.LabelFor(model => model.LandLineNo2, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.LandLineNo2, new { htmlAttributes = new { @class = "form-control", placeholder = "LandLine No 2" } })
+                            @Html.ValidationMessageFor(model => model.LandLineNo2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 pull-right">
+                            <div class="pull-right btn-group">
+                                <input type="submit" name="Command" value="Save" class="btn btn-info btn-group-sm" />
+                                <input type="submit" name="CancelAddress" value="Cancel" class="btn btn-default btn-group-sm" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+﻿
+
+<ul id="divTabs" class="nav nav-tabs nav-icon-menu tabs-left">
+    @if (Model == "Personal")
+    {
+        <li role="presentation" class="active" style="z-index:1">
+            <a href='@Url.Action("Personal","Profile")'><i class="glyphicon glyphicon-user"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Personal</span></a>
+            @*@Html.ActionLink("Personal", "Personal", "Profile")*@
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            @*@Html.ActionLink("Personal", "Personal", "Profile")*@
+            <a href='@Url.Action("Personal","Profile")'><i class="glyphicon glyphicon-user"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Personal</span></a>
+        </li>
+    }
+    @if (Model == "Address")
+    {
+        <li role="presentation" class="active" style="z-index:1">
+            <a href='@Url.Action("Address","Profile")'><i class="glyphicon glyphicon-list-alt"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Address</span></a>
+            @*@Html.ActionLink("Address", "Address", "Profile")*@
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            <a href='@Url.Action("Address","Profile")'><i class="glyphicon glyphicon-list-alt"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Address</span></a>
+            @*@Html.ActionLink("Address", "Address", "Profile")*@
+        </li>
+    }
+    @if (Model == "Contact")
+    {
+        <li role="presentation" class="active" style="z-index:1">
+            <a href='@Url.Action("Contact","Profile")'><i class="glyphicon glyphicon-phone-alt"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Contact</span></a>
+            @*@Html.ActionLink("Contact", "Contact", "Profile")*@
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            <a href='@Url.Action("Contact","Profile")'><i class="glyphicon glyphicon-phone-alt"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Contact</span></a>
+            @*@Html.ActionLink("Contact", "Contact", "Profile")*@
+        </li>
+    }
+    @if (Model == "Education")
+    {
+        <li role="presentation" class="active" style="z-index:1">
+            <a href='@Url.Action("Education","Profile")'><i class="glyphicon glyphicon-edit"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Education</span></a>
+            @*@Html.ActionLink("Education", "Education", "Profile")*@
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            <a href='@Url.Action("Education","Profile")'><i class="glyphicon glyphicon-edit"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Education</span></a>
+            @*@Html.ActionLink("Education", "Education", "Profile")*@
+        </li>
+    }
+    @if (Model == "Professional")
+    {
+        <li role="presentation" class="active" style="z-index:1">
+            <a href='@Url.Action("Professional","Profile")'><i class="glyphicon glyphicon-briefcase"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Professional</span></a>
+            @*@Html.ActionLink("Professional", "Professional", "Profile")*@
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            <a href='@Url.Action("Professional","Profile")'><i class="glyphicon glyphicon-briefcase"></i><span class="hidden-xs hidden-sm pull-right col-md-10">Professional</span></a>
+            @*@Html.ActionLink("Professional", "Professional", "Profile")*@
+        </li>
+    }
+
+</ul>
+
+
+
+
+@*<ul id="divTabs" class="nav nav-tabs nav-justified">
+    @if (Model == "Personal")
+    {
+        <li role="presentation" class="active">
+            @Html.ActionLink("Personal", "Personal", "Profile")
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            @Html.ActionLink("Personal", "Personal", "Profile")
+        </li>
+    }
+    @if (Model == "Address")
+    {
+        <li role="presentation" class="active">
+            @Html.ActionLink("Address", "Address", "Profile")
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            @Html.ActionLink("Address", "Address", "Profile")
+        </li>
+    }
+    @if (Model == "Contact")
+    {
+        <li role="presentation"  class="active">
+            @Html.ActionLink("Contact", "Contact", "Profile")
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            @Html.ActionLink("Contact", "Contact", "Profile")
+        </li>
+    }
+    @if (Model == "Education")
+    {
+        <li role="presentation" class="active">
+            @Html.ActionLink("Education", "Education", "Profile")
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            @Html.ActionLink("Education", "Education", "Profile")
+        </li>
+    }
+    @if (Model == "Professional")
+    {
+        <li role="presentation" class="active">
+            @Html.ActionLink("Professional", "Professional", "Profile")
+        </li>
+    }
+    else {
+        <li role="presentation" class="">
+            @Html.ActionLink("Professional", "Professional", "Profile")
+        </li>
+    }
+
+</ul>*@

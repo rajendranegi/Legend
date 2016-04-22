@@ -1,0 +1,278 @@
+﻿@using LegendBLL
+@model AddressDetail
+
+@{
+    ViewBag.Title = "Address";
+}
+
+
+<h2 class="text-center"> Manage Profile</h2>
+<div class="clearfix">
+    <div id="divProfile" class="col-xs-3 col-sm-1 col-md-2" style="padding-right:0px;">
+        @Html.Partial("~/Views/Profile/_ProfileTab.cshtml", "Address")
+    </div>
+    <div class="col-xs-9 col-sm-11 col-md-10" style="padding-left:0px;">
+        <div id="divTabsContent" class="tab-content tab-pane bordered" style="padding:15px;">
+            <div class="form-horizontal">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PresentAddressLine1, "Present Address Line 1", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                                @Html.EditorFor(model => model.PresentAddressLine1, new { htmlAttributes = new { @class = "form-control", placeholder = "Present Address Line 1" } })
+                                @Html.ValidationMessageFor(model => model.PresentAddressLine1, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PresentAddressLine2, "Present Address Line 2", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PresentAddressLine2, new { htmlAttributes = new { @class = "form-control", placeholder = "Present Address Line 1" } })
+                                @Html.ValidationMessageFor(model => model.PresentAddressLine2, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @*@Html.LabelFor(model => model.personalDetail.LastName, "Last Name", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.personalDetail.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.personalDetail.LastName, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PresentCountryID, "Country", htmlAttributes: new { @class = "control-label" })
+                                @{
+                                    var listItemCountry = new List<SelectListItem>
+                                        ();
+                                    listItemCountry.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                    foreach (CountryModel objCountry in (List<CountryModel>
+                                        )Model.countryList)
+                                    {
+                                        listItemCountry.Add(new SelectListItem { Text = objCountry.Country, Value = Convert.ToString(objCountry.CountryID) });
+                                    }
+
+                                }
+                                @Html.DropDownListFor(model => model.PresentCountryID, listItemCountry, htmlAttributes: new { @class = "form-control", onchange = "onCountryChangeBindStatePresent();" })
+                                @Html.ValidationMessageFor(model => model.PresentCountryID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PresentStateID, "State", htmlAttributes: new { @class = "control-label" })
+                                @{
+                                    var listItemState = new List<SelectListItem>
+                                        ();
+                                    listItemState.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                    foreach (StateModel objState in (List<StateModel>
+                                        )Model.stateList)
+                                    {
+                                        listItemState.Add(new SelectListItem { Text = objState.StateName, Value = Convert.ToString(objState.StateID) });
+                                    }
+                                }
+                                @Html.DropDownListFor(model => model.PresentStateID, listItemState, htmlAttributes: new { @class = "form-control", onchange = "onStateChangeBindCityPresent();" })
+                                @Html.ValidationMessageFor(model => model.PresentStateID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PresentCityID, "City", htmlAttributes: new { @class = "control-label" })
+                                @{
+                                    var listItemCity = new List<SelectListItem>
+                                        ();
+                                    listItemCity.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                    foreach (CityModel objCity in (List<CityModel>
+                                        )Model.cityList)
+                                    {
+                                        listItemCity.Add(new SelectListItem { Text = objCity.CityName, Value = Convert.ToString(objCity.CityID) });
+                                    }
+                                }
+                                @Html.DropDownListFor(model => model.PresentCityID, listItemCity, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PresentCityID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PresentPinCode, "Present PinCode", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PresentPinCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Pin Code" } })
+                                @Html.ValidationMessageFor(model => model.PresentPinCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PermanentAddressLine1, "Permanent Address Line 1", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                                @Html.EditorFor(model => model.PermanentAddressLine1, new { htmlAttributes = new { @class = "form-control", placeholder = "Permanent Address Line 1" } })
+                                @Html.ValidationMessageFor(model => model.PermanentAddressLine1, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PermanentAddressLine2, "Permanent Address Line 2", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PermanentAddressLine2, new { htmlAttributes = new { @class = "form-control", placeholder = "Permanent Address Line 1" } })
+                                @Html.ValidationMessageFor(model => model.PermanentAddressLine2, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PermanentCountryID, "Country", htmlAttributes: new { @class = "control-label" })
+
+                                @Html.DropDownListFor(model => model.PermanentCountryID, listItemCountry, htmlAttributes: new { @class = "form-control", onchange = "onCountryChangeBindStatePermanent();" })
+                                @Html.ValidationMessageFor(model => model.PermanentCountryID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PermanentStateID, "State", htmlAttributes: new { @class = "control-label" })
+
+                                @Html.DropDownListFor(model => model.PermanentStateID, listItemState, htmlAttributes: new { @class = "form-control", onchange = "onStateChangeBindCityPermanent();" })
+                                @Html.ValidationMessageFor(model => model.PermanentStateID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PermanentCityID, "City", htmlAttributes: new { @class = "control-label" })
+
+                                @Html.DropDownListFor(model => model.PermanentCityID, listItemCity, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PermanentCityID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                @Html.LabelFor(model => model.PermanentPinCode, "Permanent PinCode", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PermanentPinCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Pin Code" } })
+                                @Html.ValidationMessageFor(model => model.PermanentPinCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3 pull-right">
+                                <div class="pull-right btn-group">
+                                    <input type="submit" name="Command" value="Save" class="btn btn-info btn-group-sm" />
+                                    <input type="submit" name="CancelAddress" value="Cancel" class="btn btn-default btn-group-sm" />
+                                    @*@Ajax.ActionLink("Save Ajax", "AjaxPost", "ProfileManage", new { postType = "Address" }, new AjaxOptions()
+                                        {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "divTabsContent",
+                                        InsertionMode = InsertionMode.Replace
+                                        })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    function onCountryChangeBindStatePresent() {
+        var countryId = $('#PresentCountryID').val();
+        $('#PresentCityID').html('').html("<option value='0'>Select</option>");
+        $('#PresentStateID').html('');
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $('#PresentStateID').html(procemessage).show();
+        var url = '@Url.Action("GetSelectedState4Country")'; // "/City/GetSelectedState4COuntry";
+
+        $.ajax({
+            url: url,
+            data: { Id: countryId },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                var markup = "<option value='0'>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $('#PresentStateID').html('');
+                $('#PresentStateID').html(markup).show();
+            },
+            error: function (reponse) {
+                alert(JSON.parse(reponse));
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+
+    function onStateChangeBindCityPresent() {
+
+        var StateID = $('#PresentStateID').val();
+        $('#PresentCityID').html('');
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $('#PresentCityID').html(procemessage).show();
+        var url = '@Url.Action("GetSelectedCity4State")'; // "/City/GetSelectedState4COuntry";
+
+        $.ajax({
+            url: url,
+            data: { Id: StateID },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                var markup = "<option value='0'>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $('#PresentCityID').html('');
+                $('#PresentCityID').html(markup).show();
+            },
+            error: function (reponse) {
+                alert(JSON.parse(reponse));
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+
+    function onCountryChangeBindStatePermanent() {
+        var countryId = $('#PermanentCountryID').val();
+        $('#PermanentCityID').html('').html("<option value='0'>Select</option>");
+        $('#PermanentStateID').html('');
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $('#PermanentStateID').html(procemessage).show();
+        var url = '@Url.Action("GetSelectedState4Country")'; // "/City/GetSelectedState4COuntry";
+
+        $.ajax({
+            url: url,
+            data: { Id: countryId },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                var markup = "<option value='0'>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $('#PermanentStateID').html('');
+                $('#PermanentStateID').html(markup).show();
+            },
+            error: function (reponse) {
+                alert(JSON.parse(reponse));
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+
+    function onStateChangeBindCityPermanent() {
+
+        var StateID = $('#PermanentStateID').val();
+        $('#PermanenttCityID').html('');
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $('#PermanentCityID').html(procemessage).show();
+        var url = '@Url.Action("GetSelectedCity4State")'; // "/City/GetSelectedState4COuntry";
+
+        $.ajax({
+            url: url,
+            data: { Id: StateID },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                var markup = "<option value='0'>Select</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $('#PermanentCityID').html('');
+                $('#PermanentCityID').html(markup).show();
+            },
+            error: function (reponse) {
+                alert(JSON.parse(reponse));
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+</script>

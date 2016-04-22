@@ -1,0 +1,113 @@
+﻿@using LegendBLL
+@model PersonalDetail
+
+@{
+    ViewBag.Title = "Personal";
+    //Layout = "~/Views/_ViewStart.cshtml";
+}
+
+
+<div class="container-fluid">
+    <h2 class="text-center"> Manage Profile</h2>
+    <div class="clearfix container-fluid">
+        <div id="divProfile" class="col-xs-3 col-sm-2 col-md-2" style="padding-right:0px;">
+            @Html.Partial("~/Views/Profile/_ProfileTab.cshtml", "Personal")
+            @*<ul id="divTabs" class="nav nav-tabs nav-justified">
+                     <li role="presentation" class="active">
+                         @Html.ActionLink("Personal", "Personal", "Profile")
+                     </li>
+                     <li role="presentation">
+                         @Html.ActionLink("Address", "Address", "Profile")
+                     </li>
+                     <li role="presentation">
+                         @Html.ActionLink("Contact", "Contact", "Profile")
+                     </li>
+            </ul>*@
+        </div>
+        <div class="col-xs-9 col-sm-10 col-md-10" style="padding-left:0px;">
+            <div id="divTabsContent" class="tab-content tab-pane bordered" style="padding:15px;">
+                <div class="form-horizontal">
+                    @using (Html.BeginForm("Personal", "Profile", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.SalutationID, "Salutation", htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        var listItemSalutation = new List<SelectListItem>();
+                                        listItemSalutation.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                        foreach (SalutationModel objSalutation in (List<SalutationModel>)Model.salutationList)
+                                        {
+                                            listItemSalutation.Add(new SelectListItem { Text = objSalutation.Salutation, Value = Convert.ToString(objSalutation.SalutationID) });
+                                        }
+                                    }
+                                    @Html.DropDownListFor(model => model.SalutationID, listItemSalutation, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SalutationID, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "control-label" })<span style="color:red">&nbsp;*</span>
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.MiddleName, "Middle Name", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.DOBActual, "DOB Actual", htmlAttributes: new { @class = "control-label" })
+                                    <div class='input-group date' id='dtDOBActual' data-date-format="DD/MM/YYYY">
+                                        @Html.EditorFor(model => model.DOBActual, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    @Html.LabelFor(model => model.DOBOfficial, "DOB Official", htmlAttributes: new { @class = "control-label" })
+                                    <div class='input-group date' id='dtDOBOfficial' data-date-format="DD/MM/YYYY">
+                                        @Html.EditorFor(model => model.DOBOfficial, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3 pull-right">
+                                    <div class="pull-right btn-group">
+                                        <input type="submit" name="ActionType" value="Save" class="btn btn-info btn-group-sm" />
+                                        <input type="submit" name="ActionType" value="Cancel" class="btn btn-default btn-group-sm" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                        }
+                </div>
+            </div>
+            @*</div>*@
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('div[id$=dtDOBActual]').datetimepicker({ pickTime: false, format: "DD/MM/YYYY" });
+            $('div[id$=dtDOBOfficial]').datetimepicker({ pickTime: false, format: "DD/MM/YYYY" });
+
+
+
+        });
+    </script>
+}
+
+

@@ -1,0 +1,59 @@
+﻿@using LegendBLL
+@model PersonalDetail
+
+<div id="divProfile" class="container">
+    <h2> Manage Profile</h2>
+
+    <ul id="divTabs" class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active">
+            @Ajax.ActionLink("Personal", "Personal", "ProfileManage", new AjaxOptions()
+       {
+           HttpMethod = "Post",
+           UpdateTargetId = "divTabsContent",
+           InsertionMode = InsertionMode.Replace
+       })
+        </li>
+        <li role="presentation">
+            @Ajax.ActionLink("Address", "Address", "ProfileManage", new AjaxOptions()
+       {
+           HttpMethod = "Post",
+           UpdateTargetId = "divTabsContent",
+           InsertionMode = InsertionMode.Replace
+       })
+        </li>
+        <li role="presentation">
+            @Ajax.ActionLink("Contact", "Contact", "ProfileManage", new AjaxOptions()
+       {
+           HttpMethod = "POST",
+           UpdateTargetId = "divTabsContent",
+           InsertionMode = InsertionMode.Replace
+       })
+        </li>
+    </ul>
+   @*@using (Ajax.BeginForm("AjaxPost", "ProfileManage", new { postType = "Personal" }, new AjaxOptions()
+    {
+
+        HttpMethod = "Post",
+        UpdateTargetId = "divTabsContent",
+        InsertionMode = InsertionMode.Replace
+    }))
+    {*@   
+        <div id="divTabsContent" class="tab-content tab-pane bordered" style="padding:15px;">
+            @Html.Partial("~/Views/ProfileManage/_DetailPersonal.cshtml", Model);
+            @*<div id="divTabsContent" class="tab-pane"></div>*@
+        </div>
+   @*}*@
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('ul#divTabs a').click(function () {
+                $(this).parent().siblings().removeClass('active');
+                $(this).parent().addClass('active');
+            });
+            // $('projectList').tab('show');
+        });
+    </script>
+}

@@ -1,0 +1,82 @@
+﻿@using LegendBLL
+@{
+    //UserSessionModel objLogin = (UserSessionModel)Session[UserSessionModel.userSessionName];
+    //ViewBag.UserName = Convert.ToString(objLogin.FirstName) + " " + Convert.ToString(objLogin.LastName);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Arth Inspiring Future</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @Styles.Render("~/bundles/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand" style="padding: 10px;">
+                        <img src="~/Images/UID.png" alt="UID" class="img-responsive" />
+                    </div>
+                    @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Admin")</li>
+                        @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    </ul>
+                    <ul class='nav navbar-nav navbar-right' role="menu">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class='fa fa-user'></i> Welcome, @ViewBag.UserName  </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ChangePassword.aspx"><i class="glyphicon glyphicon-cog"></i> Change Password</a></li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink(" Role", "RoleManager", "RoleManager", null, new { @class = "glyphicon glyphicon-log-out" })</li>
+                                <li class="divider"></li>
+                                @*<li><a href=""><i class="glyphicon glyphicon-log-out"></i> Sign Out</a></li>*@
+                                <li>@Html.ActionLink(" LogOut", "LogOut", "Login", null, new { @class = "glyphicon glyphicon-log-out" })</li>
+                                @*<li><a href="@Html.Action("Logout","Login")"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>*@
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                    @*<div class="btn-group btn-group-option">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="ChangePassword.aspx"><i class="glyphicon glyphicon-cog"></i>Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a href="Login.aspx?MODE=LOGOUT"><i class="glyphicon glyphicon-log-out"></i>Sign Out</a></li>
+                            </ul>
+                        </div>*@
+                    @*@Html.Partial("_LoginPartial")*@
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid body-content" style="padding:0px 15px">
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @*@Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/bundles/bootstrap")*@
+        @RenderSection("scripts", required: false)
+        <hr />
+        
+    </div>
+    <footer class="text-center">
+        <p>Arth Inspiring Future  &copy; Copyright 2014 - @DateTime.Now.Year</p>
+    </footer>
+
+</body>
+</html>
